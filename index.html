@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LAVKOPI | Sip, Relax, Repeat</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        /* Color Themes Setup */
+        :root[data-theme="light"] {
+            --bg-main: #f5f0eb;
+            --primary: #2c221e;
+            --secondary: #b87d4b;
+            --accent: #d4a373;
+            --card-bg: #fcf9f5;
+            --text-muted: #6e5f57;
+            --border-color: #e6ded5;
+            --nav-bg: rgba(245, 240, 235, 0.9);
+            --shadow-subtle: 0 10px 30px rgba(44, 34, 30, 0.05);
+            --catalog-hover: #ede5dd;
+        }
+
+        :root[data-theme="dark"] {
+            --bg-main: #14100e;
+            --primary: #f7f3ef;
+            --secondary: #d4a373;
+            --accent: #b87d4b;
+            --card-bg: #1c1613;
+            --text-muted: #b0a39b;
+            --border-color: #2b221d;
+            --nav-bg: rgba(20, 16, 14, 0.85);
+            --shadow-subtle: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --catalog-hover: #241d18;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--primary);
+            overflow-x: hidden;
+        }
+
+        /* Navigation Bar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: blur(15px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 8%;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .logo-container img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--secondary);
+            padding: 2px;
+        }
+
+        .nav-right-cluster {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--secondary);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-subtle);
+            font-size: 1.1rem;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--secondary);
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        header.hero {
+            margin-top: 100px;
+            width: 100%;
+            text-align: center;
+            padding: 40px 5% 60px 5%;
+        }
+
+        .hero-banner {
+            width: 100%;
+            max-width: 1100px;
+            max-height: 75vh;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+            border-radius: 24px;
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid var(--border-color);
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 35px;
+            flex-wrap: wrap;
+        }
+
+        .btn-main {
+            background: var(--secondary);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 35px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            box-shadow: 0 8px 25px rgba(184, 125, 75, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-main:hover {
+            transform: translateY(-3px);
+            opacity: 0.9;
+        }
+
+        .btn-sec {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--border-color);
+            padding: 14px 32px;
+            border-radius: 35px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .btn-sec:hover {
+            border-color: var(--secondary);
+            color: var(--secondary);
+            transform: translateY(-3px);
+        }
+
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 50px auto;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 12px;
+            letter-spacing: -1px;
+        }
+
+        .section-header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            padding: 90px 8%;
+            background: var(--bg-main);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+        }
+
+        .menu-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-subtle);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--secondary);
+            box-shadow: 0 20px 40px rgba(184, 125, 75, 0.15);
+        }
+
+        .menu-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .menu-card:hover img {
+            transform: scale(1.04);
+        }
+
+        .menu-card-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .menu-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .menu-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .menu-badge {
+            align-self: flex-start;
+            background: rgba(184, 125, 75, 0.15);
+            color: var(--secondary);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.85rem;
+        }
+
+        /* Price Catalog */
+        .price-catalog {
+            padding: 90px 8%;
+            background: var(--bg-main);
+        }
+
+        .catalog-container {
+            max-width: 950px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 28px;
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid var(--border-color);
+        }
+
+        .catalog-category {
+            margin-bottom: 45px;
+        }
+
+        .catalog-category:last-child {
+            margin-bottom: 0;
+        }
+
+        .catalog-category h3 {
+            font-size: 1.4rem;
+            color: var(--secondary);
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .category-subtext {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-style: italic;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .catalog-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            font-size: 1.05rem;
+            padding: 10px 14px;
+            border-radius: 12px;
+        }
+
+        .catalog-item:hover {
+            background-color: var(--catalog-hover);
+            transform: translateX(4px);
+        }
+
+        .catalog-item .item-name {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .catalog-item .item-price {
+            font-weight: 700;
+            color: var(--secondary);
+        }
+
+        /* Location Section */
+        .location-section {
+            padding: 90px 8%;
+            background: var(--bg-main);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .location-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 28px;
+            border: 1px solid var(--border-color);
+        }
+
+        .location-info h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .location-info p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .location-details {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .location-details li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .location-details li i {
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        .location-map-box {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+            border: 2px solid var(--border-color);
+            height: 320px;
+        }
+
+        .location-map-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .location-map-box:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            padding: 90px 8%;
+            background: var(--bg-main);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .no-reviews-msg {
+            grid-column: 1 / -1;
+            text-align: center;
+            color: var(--text-muted);
+            font-style: italic;
+            padding: 20px;
+        }
+
+        .review-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow-subtle);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .review-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--secondary);
+        }
+
+        .review-stars {
+            color: #e9b44c;
+            margin-bottom: 15px;
+        }
+
+        .review-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .review-img-preview {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .review-author {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .star-rating-picker {
+            display: flex;
+            gap: 8px;
+            font-size: 1.5rem;
+            color: var(--border-color);
+            cursor: pointer;
+            margin-bottom: 5px;
+        }
+
+        .star-rating-picker i.active {
+            color: #e9b44c;
+        }
+
+        .review-form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 45px;
+            border-radius: 28px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .review-form-container h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 800;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+
+        .form-group input[type="text"], .form-group textarea, .form-group input[type="file"] {
+            width: 100%;
+            padding: 12px 18px;
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-main);
+            font-size: 1rem;
+            color: var(--primary);
+            outline: none;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 4px rgba(184, 125, 75, 0.15);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 120px;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 90px 8%;
+            background: var(--bg-main);
+            border-top: 1px solid var(--border-color);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            height: 350px;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s ease;
+        }
+
+        .gallery-card:hover img {
+            transform: scale(1.06);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
+            padding: 30px 25px;
+            color: white;
+        }
+
+        .gallery-overlay h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.9rem;
+            color: #dcd2c4;
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 100px 8%;
+            background: var(--bg-main);
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 20px;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: var(--shadow-subtle);
+            height: 420px;
+            border: 1px solid var(--border-color);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Footer */
+        footer {
+            background: #0f0b09;
+            color: #fff;
+            padding: 60px 8% 40px 8%;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .footer-brand p {
+            color: #a3948c;
+        }
+
+        .footer-socials a {
+            color: white;
+            font-size: 1.5rem;
+            margin-left: 20px;
+        }
+
+        .footer-socials a:hover {
+            color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            color: #a3948c;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 900px) {
+            .location-container, .about-section {
+                flex-direction: column;
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            .catalog-container, .review-form-container {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo-container">
+            <img src="logo.png" alt="LAVKOPI Logo">
+            <span>LAVKOPI</span>
+        </div>
+        <div class="nav-right-cluster">
+            <ul class="nav-links">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#catalog">Price List</a></li>
+                <li><a href="#location">Location</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+            <button class="theme-toggle" id="themeToggleBtn" aria-label="Toggle Dark/Light Mode">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <header class="hero" id="home">
+        <img src="header.jpg" alt="LAVKOPI Header Banner" class="hero-banner">
+        
+        <div class="hero-btns">
+            <a href="#catalog" class="btn-main"><i class="fas fa-book-open"></i> View Menu Prices</a>
+            <a href="#reviews" class="btn-sec">Leave a Review</a>
+        </div>
+    </header>
+
+    <section class="menu-section" id="menu">
+        <div class="section-header">
+            <h2>Featured Specialties</h2>
+            <p>Hand-crafted with passion, premium beans, and fresh ingredients every single day.</p>
+        </div>
+        
+        <div class="menu-grid">
+            <div class="menu-card">
+                <img src="matcha.jpg" alt="Signature Matcha Latte">
+                <div class="menu-card-content">
+                    <div>
+                        <h3>Signature Matcha Latte</h3>
+                        <p>Rich, creamy, and authentic ceremonial-grade matcha expertly poured over iced fresh milk.</p>
+                    </div>
+                    <span class="menu-badge">Bestseller</span>
+                </div>
+            </div>
+            
+            <div class="menu-card">
+                <img src="place 1.jpg" alt="Cozy Space & Brews">
+                <div class="menu-card-content">
+                    <div>
+                        <h3>Cozy Space & Brews</h3>
+                        <p>An aesthetic and comfortable environment designed for your coffee breaks, study sessions, and hangouts.</p>
+                    </div>
+                    <span class="menu-badge">Vibe Check</span>
+                </div>
+            </div>
+            
+            <div class="menu-card">
+                <img src="cinnamon.jpg" alt="Specialty Drinks">
+                <div class="menu-card-content">
+                    <div>
+                        <h3>Hand-crafted Specials</h3>
+                        <p>Refreshing seasonal beverages and signature coffee mixes created to keep you going all day.</p>
+                    </div>
+                    <span class="menu-badge">Must Try</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="price-catalog" id="catalog">
+        <div class="section-header">
+            <h2>LAVKOPI Menu & Prices</h2>
+            <p>Check out our complete selection of coffee, matcha, frappe, and non-coffee beverages.</p>
+        </div>
+
+        <div class="catalog-container">
+            <div class="catalog-category">
+                <h3>☕ Coffee</h3>
+                <div class="category-subtext">One size only. 16 oz (Except 12 oz hot drinks).</div>
+                
+                <h4 style="font-size: 1.1rem; color: var(--primary); margin: 15px 0 10px 0;">Classic</h4>
+                <div class="catalog-item"><span class="item-name">Americano</span><span class="item-price">₱130</span></div>
+                <div class="catalog-item"><span class="item-name">Spanish Latte</span><span class="item-price">₱150</span></div>
+                <div class="catalog-item"><span class="item-name">White Mocha</span><span class="item-price">₱160</span></div>
+                <div class="catalog-item"><span class="item-name">Dark Mocha</span><span class="item-price">₱160</span></div>
+                <div class="catalog-item"><span class="item-name">Caramel Macchiato</span><span class="item-price">₱160</span></div>
+
+                <h4 style="font-size: 1.1rem; color: var(--primary); margin: 25px 0 10px 0;">Specialties</h4>
+                <div class="catalog-item"><span class="item-name">Black Gulaman Americano</span><span class="item-price">₱170</span></div>
+                <div class="catalog-item"><span class="item-name">Ube Latte</span><span class="item-price">₱180</span></div>
+                <div class="catalog-item"><span class="item-name">Salted Vanilla Latte</span><span class="item-price">₱180</span></div>
+                <div class="catalog-item"><span class="item-name">Sea Salt Latte</span><span class="item-price">₱180</span></div>
+                <div class="catalog-item"><span class="item-name">Barista Special</span><span class="item-price">₱180</span></div>
+                <div class="catalog-item"><span class="item-name">Brown Sugar Shakerato</span><span class="item-price">₱180</span></div>
+                <div class="catalog-item"><span class="item-name">Cinnamon Oat Latte</span><span class="item-price">₱180</span></div>
+                <div class="catalog-item"><span class="item-name">Cereal Oat Latte</span><span class="item-price">₱200</span></div>
+                <div class="catalog-item"><span class="item-name">Creme Brulee Latte</span><span class="item-price">₱200</span></div>
+                <div class="catalog-item"><span class="item-name">Birthday Cake Latte</span><span class="item-price">₱200</span></div>
+                <div class="catalog-item"><span class="item-name">Whipped Maple Latte</span><span class="item-price">₱200</span></div>
+                <div class="catalog-item"><span class="item-name">Banana Pudding Latte</span><span class="item-price">₱220</span></div>
+            </div>
+
+            <div class="catalog-category">
+                <h3>🍵 Matcha</h3>
+                <div class="category-subtext">One-size only. 12 oz. 4g multi-cultivar blend and oat milk by default.</div>
+                
+                <div class="catalog-item"><span class="item-name">Matcha Latte</span><span class="item-price">₱200</span></div>
+                <div class="catalog-item"><span class="item-name">Salted Cream Matcha</span><span class="item-price">₱220</span></div>
+                <div class="catalog-item"><span class="item-name">Ube Matcha Cloud</span><span class="item-price">₱220</span></div>
+                <div class="catalog-item"><span class="item-name">Strawberry Matcha</span><span class="item-price">₱220</span></div>
+                <div class="catalog-item"><span class="item-name">Earl Grey Matcha</span><span class="item-price">₱220</span></div>
+                <div class="catalog-item"><span class="item-name">Earth Day Matcha</span><span class="item-price">₱230</span></div>
+                <div class="catalog-item"><span class="item-name">Cereal Oat Matcha</span><span class="item-price">₱230</span></div>
+                <div class="catalog-item"><span class="item-name">Coconut Matcha</span><span class="item-price">₱230</span></div>
+                <div class="catalog-item"><span class="item-name">Birthday Cake Matcha</span><span class="item-price">₱230</span></div>
+                <div class="catalog-item"><span class="item-name">Creme Brulee Matcha</span><span class="item-price">₱230</span></div>
+                <div class="catalog-item"><span class="item-name">Banana Pudding Matcha</span><span class="item-price">₱250</span></div>
+                <div class="catalog-item"><span class="item-name">NITRO Matcha (16 oz)</span><span class="item-price">₱280</span></div>
+            </div>
+
+            <div class="catalog-category">
+                <h3>🥤 Frappe</h3>
+                <div class="category-subtext">One size only. 16 oz.</div>
+                
+                <div class="catalog-item"><span class="item-name">Biscoff Crunch</span><span class="item-price">₱180</span></div>
+                <div class="catalog-item"><span class="item-name">Cookies and Cream</span><span class="item-price">₱180</span></div>
+                <div class="catalog-item"><span class="item-name">Strawberries and Cream</span><span class="item-price">₱180</span></div>
+                <div class="catalog-item"><span class="item-name">Java Chip</span><span class="item-price">₱180</span></div>
+                <div class="catalog-item"><span class="item-name">Matcha Latte Frappe</span><span class="item-price">₱240</span></div>
+            </div>
+
+            <div class="catalog-category">
+                <h3>🥛 Non-Coffee</h3>
+                <div class="category-subtext">One size only. 16 oz.</div>
+                
+                <div class="catalog-item"><span class="item-name">Thai Pink Milk</span><span class="item-price">₱120</span></div>
+                <div class="catalog-item"><span class="item-name">Strawberry Milk</span><span class="item-price">₱130</span></div>
+                <div class="catalog-item"><span class="item-name">Double Chocolate</span><span class="item-price">₱130</span></div>
+                <div class="catalog-item"><span class="item-name">Meiji Latte</span><span class="item-price">₱150</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATION SECTION -->
+    <section class="location-section" id="location">
+        <div class="section-header" style="margin-bottom: 30px;">
+            <h2>Visit Our Haven</h2>
+            <p>Drop by, find a cozy spot, and let's share a cup of coffee together.</p>
+        </div>
+
+        <div class="location-container">
+            <div class="location-info">
+                <h3>LAVKOPI Location</h3>
+                <p>We are nestled right in your neighborhood, ready to serve your daily dose of comfort and caffeine.</p>
+                
+                <ul class="location-details">
+                    <li><i class="fas fa-map-marker-alt"></i> Near Puregold Buhay na Tubig, Imus</li>
+                    <li><i class="fas fa-clock"></i> Open Daily: 10:00 AM – 10:00 PM</li>
+                    <li><i class="fas fa-mug-hot"></i> Dine-in, Takeout, & Good Vibes</li>
+                </ul>
+
+                <a href="https://maps.google.com" target="_blank" class="btn-main" style="display: inline-block;">Open in Google Maps</a>
+            </div>
+
+            <div class="location-map-box">
+                <img src="location.lav.png" alt="LAVKOPI Map Location">
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews-section" id="reviews">
+        <div class="section-header">
+            <h2>What Our Suki Say</h2>
+            <p>Share your own experience and feedback at LAVKOPI!</p>
+        </div>
+
+        <div class="reviews-grid" id="reviewsGrid">
+            <p class="no-reviews-msg" id="noReviewsText">No reviews yet. Be the first customer to share your experience below!</p>
+        </div>
+
+        <div class="review-form-container">
+            <h3>Share Your LAVKOPI Experience</h3>
+            <form id="reviewForm">
+                <div class="form-group">
+                    <label for="reviewerName">Name or Nickname</label>
+                    <input type="text" id="reviewerName" placeholder="e.g. John Doe" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Star Rating (Click to select)</label>
+                    <div class="star-rating-picker" id="starPicker">
+                        <i class="fas fa-star active" data-value="1"></i>
+                        <i class="fas fa-star active" data-value="2"></i>
+                        <i class="fas fa-star active" data-value="3"></i>
+                        <i class="fas fa-star active" data-value="4"></i>
+                        <i class="fas fa-star active" data-value="5"></i>
+                    </div>
+                    <input type="hidden" id="reviewRating" value="5">
+                </div>
+
+                <div class="form-group">
+                    <label for="reviewImage">Attach a Photo (Optional)</label>
+                    <input type="file" id="reviewImage" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    <label for="reviewMessage">What do you think about our drinks or store ambiance?</label>
+                    <textarea id="reviewMessage" placeholder="Tell us about your visit and experience here..." required></textarea>
+                </div>
+                <button type="submit" class="btn-main" style="width: 100%;">Submit Review</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <div class="section-header">
+            <h2>The LAVKOPI Experience</h2>
+            <p>Take a peek inside our cozy corners and watch how every single cup is prepared.</p>
+        </div>
+
+        <div class="gallery-grid">
+            <div class="gallery-card">
+                <img src="place 1.jpg" alt="Aesthetic Interior">
+                <div class="gallery-overlay">
+                    <h3>Relaxing Ambiance</h3>
+                    <p>Designed for comfort and good conversations.</p>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <img src="matcha.jpg" alt="Matcha Pouring">
+                <div class="gallery-overlay">
+                    <h3>Freshly Handcrafted</h3>
+                    <p>Prepared meticulously with top-tier components.</p>
+                </div>
+            </div>
+            <div class="gallery-card">
+                <img src="place.jpg" alt="Coffee Corner">
+                <div class="gallery-overlay">
+                    <h3>Passionate Baristas</h3>
+                    <p>Brewing perfection in every single serving.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="about-text">
+            <h2>Crafted with Passion, Served with Love</h2>
+            <p>Here at <strong>LAVKOPI</strong>, we believe every cup tells a story. From sourcing premium quality beans to whipping up our signature lattes and matcha, we ensure that every sip feels like home.</p>
+            <p>Step inside, take a seat, unwind, or grab your favorite brew to jumpstart your day!</p>
+            <a href="#catalog" class="btn-main" style="display: inline-block; margin-top: 10px;">Explore Our Menu Prices</a>
+        </div>
+        <div class="about-image">
+            <img src="place 1.jpg" alt="LAVKOPI Shop Interior">
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>LAVKOPI</h3>
+                <p>Sip, Relax, Repeat. Your ultimate coffee haven.</p>
+            </div>
+            <div class="footer-socials">
+                <a href="https://www.facebook.com/lavkopiph?mibextid=wwXIfr&rdid=aU8grPnBLbIjU6Gl&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1acG4xBp3m%2F%3Fmibextid%3DwwXIfr#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://www.instagram.com/lavkopi/?hl=en" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@lav.kopi?_r=1&_d=secCgYIASAHKAESPgo8Mk0hdjpX5s1d7sb9BxTRrCeUvPpacTkwrV%2B2OkxZwIf%2BmpHbKWLusABnYfwPV04u2t%2BhMarTQx3znSEsGgA%3D&_svg=1&checksum=44a083097bcb45288d34b810753a0e9d32790e407a4ae2ad499267858dfa27f9&item_author_type=2&panel_source_v2=share_panel&reflow_sign_scene=7&rgssign=8.1.dCx5T01Jl159-0AML1mx1Q&sec_uid=MS4wLjABAAAAp0NpFkCkwJJuKyQ3HePIrrsvhggQATMYQI7iZ5GoVkwqjdD5tS3ahnGBQ9bIVK5d&sec_user_id=MS4wLjABAAAAIROESy6JqyZs5cOKlMuJUiBi997Dr9rAVRJj1CoOwSlwbyapZWQT-sYvUCWfO8Yz&share_app_id=1180&share_author_id=7678658907367179282&share_enter_from=others_homepage&share_link_id=1D58A07A-56C9-431C-88D2-F05E910F53E0&share_region=PH&share_scene=1&sharer_language=en&social_share_type=5&source=h5_t&timestamp=1788526298&tt_from=copy&u_code=dbc304h57ecl1l&ug_btm=b6880%2Cb5836&user_id=6805091942470190081&utm_campaign=client_share&utm_medium=ios&utm_source=copy" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+        <p class="copyright">&copy; 2026 LAVKOPI. All Rights Reserved. Designed for Coffee & Matcha Lovers.</p>
+    </footer>
+
+    <script>
+        // Dark Mode / Light Mode Toggle Logic
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const themeIcon = document.getElementById('themeIcon');
+        const htmlElement = document.documentElement;
+
+        const currentTheme = localStorage.getItem('lavkopi_theme') || 'light';
+        htmlElement.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
+
+        themeToggleBtn.addEventListener('click', () => {
+            let theme = htmlElement.getAttribute('data-theme');
+            let newTheme = theme === 'light' ? 'dark' : 'light';
+            
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('lavkopi_theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'fas fa-sun';
+            } else {
+                themeIcon.className = 'fas fa-moon';
+            }
+        }
+
+        // Interactive Star Rating Logic
+        const stars = document.querySelectorAll('#starPicker i');
+        const ratingInput = document.getElementById('reviewRating');
+
+        stars.forEach((star, index) => {
+            star.addEventListener('click', () => {
+                const ratingValue = index + 1;
+                ratingInput.value = ratingValue;
+                stars.forEach((s, i) => {
+                    if (i < ratingValue) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // Review Form Handling & LocalStorage Integration
+        const reviewForm = document.getElementById('reviewForm');
+        const reviewsGrid = document.getElementById('reviewsGrid');
+        const noReviewsText = document.getElementById('noReviewsText');
+
+        function loadReviews() {
+            const savedReviews = JSON.parse(localStorage.getItem('lavkopi_reviews')) || [];
+            if (savedReviews.length > 0) {
+                if(noReviewsText) noReviewsText.remove();
+                savedReviews.forEach(rev => renderReviewCard(rev, false));
+            }
+        }
+
+        function renderReviewCard(rev, prepend = true) {
+            let starsHTML = '';
+            for(let i = 0; i < rev.rating; i++) {
+                starsHTML += '<i class="fas fa-star"></i>';
+            }
+
+            const newCard = document.createElement('div');
+            newCard.className = 'review-card';
+            
+            let imgHTML = rev.image ? `<img src="${rev.image}" alt="Review Image" class="review-img-preview">` : '';
+
+            newCard.innerHTML = `
+                <div>
+                    <div class="review-stars">${starsHTML}</div>
+                    ${imgHTML}
+                    <p class="review-text">"${escapeHTML(rev.message)}"</p>
+                </div>
+                <div class="review-author">— ${escapeHTML(rev.name)}</div>
+            `;
+
+            if(prepend) {
+                reviewsGrid.prepend(newCard);
+            } else {
+                reviewsGrid.appendChild(newCard);
+            }
+        }
+
+        reviewForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('reviewerName').value.trim();
+            const rating = parseInt(ratingInput.value);
+            const message = document.getElementById('reviewMessage').value.trim();
+            const imageInput = document.getElementById('reviewImage');
+
+            if(!name || !message) return;
+
+            if(noReviewsText && noReviewsText.parentNode) {
+                noReviewsText.remove();
+            }
+
+            const processReviewData = (imgData = '') => {
+                const reviewObj = { name, rating, message, image: imgData };
+                
+                const savedReviews = JSON.parse(localStorage.getItem('lavkopi_reviews')) || [];
+                savedReviews.unshift(reviewObj);
+                localStorage.setItem('lavkopi_reviews', JSON.stringify(savedReviews));
+
+                renderReviewCard(reviewObj, true);
+                reviewForm.reset();
+                
+                ratingInput.value = 5;
+                stars.forEach(s => s.classList.add('active'));
+
+                alert('Thank you for your review! It has been successfully added.');
+            };
+
+            if(imageInput.files && imageInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(uploadEvent) {
+                    processReviewData(uploadEvent.target.result);
+                };
+                reader.readAsDataURL(imageInput.files[0]);
+            } else {
+                processReviewData('');
+            }
+        });
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag)
+            );
+        }
+
+        // Active Nav Highlighter on Scroll
+        const sections = document.querySelectorAll('section, header.hero');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        window.addEventListener('DOMContentLoaded', loadReviews);
+    </script>
+
+</body>
+</html>
